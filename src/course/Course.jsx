@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Course = ({ course }) => {
+const Course = ({ course ,handleCLick}) => {
     const { cover, course_description, course_name, credit, price } = course;
-    console.log(course_name);
+    // console.log(course_name);
     return (
         <div className='space-y-4 p-5 shadow-lg rounded-xl	'>
             <img className='w-full' src={cover} alt="" />
@@ -11,11 +11,11 @@ const Course = ({ course }) => {
                 <p className='text-xs leading-6 text-justify'>{course_description}</p>
             </div>
             <div className='flex justify-between mx-2'>
-                <p>Price : {price}</p>
+                <p>$  Price : {price}</p>
                 <p>Credit : {credit}hr</p>
             </div>
             <div className='text-center bg-[#2F80ED] rounded-xl'>
-            <button className='w-full p-3 text-white text-base font-bold'>Select</button>
+            <button onClick={()=>handleCLick(course)} className='w-full p-3 text-white text-base font-bold'>Select</button>
             </div>
         </div>
     );
