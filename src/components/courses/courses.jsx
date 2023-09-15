@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Course from '../../course/Course';
 import SelectedCourse from '../selectedCourse/SelectedCourse';
+// sweet alert 
+import Swal from 'sweetalert2'
+
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
-    const [displayData,setDisplayData] =useState([])
+    const [displayData, setDisplayData] = useState([])
+    const [credit, setCredit] = useState(0);
+    const [remaining, setRemaining] = useState(20);
 
     useEffect(() => {
         fetch('course.json')
@@ -14,8 +19,35 @@ const Courses = () => {
     // console.log(courses);
 
     const handleCLick = (course) => {
-        setDisplayData([...displayData,course]);
+        const isExist = displayData.find(item => item.id === course.id);
 
+        let totalCredit = course.credit;
+
+        if (isExist) {
+            return Swal.fire({
+                icon: 'warning',
+                title: 'Sorry...',
+                text: 'you allready add this course !',
+            })
+        } else {
+            displayData.forEach(credit => {
+                totalCredit = totalCredit + credit.credit
+            });
+            const remainingCredit = 20 - totalCredit;
+            if (totalCredit > 20) {
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Sorry...',
+                    text: 'you have not enough credit hour !',
+                })
+            } else {
+
+                setDisplayData([...displayData, course]);
+                setCredit(totalCredit);
+                setRemaining(remainingCredit);
+                console.log(credit, remaining)
+            }
+        }
     }
 
 
@@ -29,7 +61,11 @@ const Courses = () => {
                 </div>
             </div>
             <div>
-                <SelectedCourse displayData ={displayData}></SelectedCourse>
+                <SelectedCourse
+                    displayData={displayData}
+                    remaining={remaining}
+                    credit={credit}
+                ></SelectedCourse>
             </div>
         </div>
     );
