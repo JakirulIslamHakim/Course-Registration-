@@ -26,7 +26,6 @@ const Courses = () => {
         if (isExist) {
             return Swal.fire({
                 icon: 'warning',
-                title: 'Sorry...',
                 text: 'you allready add this course !',
             })
         } else {
@@ -45,7 +44,7 @@ const Courses = () => {
                 setDisplayData([...displayData, course]);
                 setCredit(totalCredit);
                 setRemaining(remainingCredit);
-                console.log(credit, remaining)
+                // console.log(credit, remaining)
             }
         }
     }

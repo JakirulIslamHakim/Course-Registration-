@@ -15,7 +15,7 @@ const SelectedCourse = ({displayData,remaining,credit}) => {
                 </ol>
             </div>
             <hr className='border-slate-600 my-4'/>
-            <h4 className='text-lg font-medium'>Total Credit Hour : {credit}</h4>
+            <h4 className='text-lg font-medium'>Total Credit Hour : {credit} hr</h4>
         </div>
     );
 };
